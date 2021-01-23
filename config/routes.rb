@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'friendships/index'
   root 'posts#index'
 
   devise_for :users
@@ -10,6 +9,5 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :friendships, only: [:index, :create, :destroy, :update]
 end

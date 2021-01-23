@@ -3,7 +3,6 @@
   <%= user.name %>
   <span class="profile-link">
     <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-    <%= friendship(user) if !current_page?(friendships_path) %>
   </span>
   <% end %>
 </li>
