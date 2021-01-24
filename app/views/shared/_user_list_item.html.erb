@@ -1,0 +1,12 @@
+<div>
+  <% case type %>
+  <% when :send %>
+    <%= render 'shared/send_request_button', user: user %>
+  <% when :accept %>
+    <div class="justify-self-end">
+    <%= render 'shared/accept_request_button', request: request %>
+    </div>
+  <% when :revoke %>
+    <%= render 'shared/revoke_request_button', request: request %>
+  <% end %>
+</div>

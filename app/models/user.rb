@@ -10,21 +10,28 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :friends
-  has_many :pending_friends, -> { where status: false }, class_name: 'Friend', foreign_key: "friend_id"
+  has_many :friend_requests,  foreign_key: :requester_id
+  has_many :friend_offers, class_name: "FriendRequest", foreign_key: :requestee_id
 
-def myfriends
-  people_i_invite = Friend.where(user_id: id, status: true).pluck(:friend_id)
-  people_invited_me = Friend.where(friend_id: id, status: true).pluck(:user_id)
-  ids = people_i_invite + people_invited_me
-end
+  has_many :friendships_made, -> { where accepted: true }, class_name: "FriendRequest",
+                                                           foreign_key: :requester_id
+  has_many :friendships_approved, -> { where accepted: true }, class_name: "FriendRequest",
+                                                               foreign_key: :requestee_id
+  has_many :friends_made, through: :friendships_made, source: :requestee
+  has_many :friends_approved, through: :friendships_approved, source: :requester
 
-def  friend_with?(user)
-  Friend.confirmed_record?(id, user.id)
-end
-
-  def send_invitation(user)
-    friends.create(friend_id: user.id)
+  def friends
+    User.where("id IN (?)", friend_ids)
   end
 
+  def strangers
+    ids = FriendRequest.other_user_id(id)
+    User.where("id NOT IN (?) AND id != (?)", ids, id)
+  end
+
+  private
+
+    def friend_ids
+      FriendRequest.accepted.other_user_id(id)
+    end      
 end

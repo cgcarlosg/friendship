@@ -1,4 +1,30 @@
-<%= current_user.name %>
-<br/>
-<br/>
-    <%= render @users %>
+  <h1 >Find Friends</h1>
+
+<% if user_signed_in? %>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Full name</th>
+      <th>Btn</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+     
+      <tr>
+        <td><%= link_to user.name, user %></td>
+        <% if user == current_user %>
+        <td><%= link_to "ME", user_path(current_user), class:"btn btn-secondary" %></td>
+        <% else %>
+        <td><%= render 'shared/user_list_item', user: user, type: :send %></td>
+        <% end %>
+      </tr>
+    
+    <% end %>
+  </tbody>
+</table>
+
+  
+<% end %>

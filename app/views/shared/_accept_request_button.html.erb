@@ -1,0 +1,6 @@
+  
+<%= form_for request do %>
+    <%= hidden_field_tag :accepted, true %>
+    <%= submit_tag "Accept Request", id:"customize" %>
+<% end %>
+<%= link_to "Delete Request", friend_request_path(request), method: :delete, class:"btn btn-secondary", data: { confirm: "You sure?" } %>

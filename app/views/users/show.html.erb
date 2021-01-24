@@ -1,26 +1,11 @@
-<div class="user-section">
-  <h3 class="display-4"><%= @user.name %></h3>
-  <%= link_to 'Back', users_path %>
-  <h3>Friends of <strong> <%= @user.name %> </strong> </h3>
-  <ol>
-  <% @user.myfriends.each do |friend| %>
-    <li>
-      <%= myfriend.name %>
- 
-    </li>
-  <% end %>
-</ol>
+<section class="user-section">
+  <h2><%= "#{@user.name}" %></h2>
+  <%= invitation(@user) if @user != current_user %>
+  <article class="timeline">
+    <h3>Recent posts:</h3>
+    <ul class="posts">
+      <%= render @posts if @posts %>
+    </ul>
+  </article>
+</section>
 
-<h3> These people wants to be friend with <strong> <%= @user.name %> </strong> </h3>
-<ol>
-<% @user.pending_friends.each do |friend| %>
-  <li>
-  </li>
-  <% end %>
-  </ol>
-
-  <%= render 'acceptance_form' %>
-  <hr class="my-4">
-  <h4>Recent posts:</h4>
-  <ul class="posts"><%= render @posts %></ul>
-</div>

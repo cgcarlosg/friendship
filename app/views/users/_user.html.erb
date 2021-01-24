@@ -1,27 +1,7 @@
-
-<table class="table table-striped table-bordered table-hover">
-
-  <thead class="thead">
-    <tr>
-      <th>NAME</th>
-      <th colspan="3">STATUS</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <% if user != current_user %>
-      <tr>
-        <td><%= link_to user.name, user_path(user) %></td>
-        <% if signed_in? && !Friend.reacted?(current_user.id, user.id) %>
-        <td> <%= link_to 'Send Invitation', friends_path(friend_id: user.id), class:"btn btn-outline-success btn-sm" %></td>
-        <% end %>
-      </tr>
-     
-    <% end %>
-    <% end %>
-  </tbody>
- 
-</table>
-
+<li>
+  Name: <%= user.name %>
+  <span class="profile-link">
+    <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+  </span>
+</li>
 
