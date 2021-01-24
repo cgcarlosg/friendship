@@ -13,10 +13,9 @@
       <% if user != current_user %>
       <tr>
         <td><%= link_to user.name, user_path(user) %></td>
-        <td><%= link_to 'Send invitation', user_path(user), class:"btn btn-outline-success btn-sm"  %></td>
-        <td>/</td>
-        
-        <td> <%= link_to 'Send Invitation', friends_path(friend_id: user.id) %></td>
+        <% if signed_in? && !Friend.reacted?(current_user.id, user.id) %>
+        <td> <%= link_to 'Send Invitation', friends_path(friend_id: user.id), class:"btn btn-outline-success btn-sm" %></td>
+        <% end %>
       </tr>
      
     <% end %>

@@ -13,7 +13,15 @@ class User < ApplicationRecord
   has_many :friends
   has_many :pending_friends, -> { where status: false }, class_name: 'Friend', foreign_key: "friend_id"
 
+def myfriends
+  people_i_invite = Friend.where(user_id: id, status: true).pluck(:friend_id)
+  people_invited_me = Friend.where(friend_id: id, status: true).pluck(:user_id)
+  ids = people_i_invite + people_invited_me
+end
 
+def  friend_with?(user)
+  Friend.confirmed_record?(id, user.id)
+end
 
   def send_invitation(user)
     friends.create(friend_id: user.id)
