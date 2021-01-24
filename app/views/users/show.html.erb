@@ -1,21 +1,6 @@
-  
-<section class="user-section">
-  <h2><%= "#{@user.name}" %></h2>
-  <article class="timeline">
-    <h3>Recent posts:</h3>
-    <ul class="posts">
-      <%= render @posts if @posts %>
-    </ul>
-  </article>
-</section>
-
-<aside class="friends-list">
-  <h2>Friends</h2>
-  <ul>
-    <% @user.friends.each do |x| %>
-    <li>
-      <%= friend_list(x) %>
-    </li>
-    <% end %>
-  </ul>
-</aside>
+<div class="user-section">
+  <h3 class="display-4"><%= @user.name %></h3>
+  <hr class="my-4">
+  <h4>Recent posts:</h4>
+  <ul class="posts"><%= render @posts %></ul>
+</div>

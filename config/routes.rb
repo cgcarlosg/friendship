@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :friends
   root 'posts#index'
 
   devise_for :users
@@ -9,5 +10,5 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
   end
-  resources :friendships, only: [:index, :create, :destroy, :update]
+ 
 end
