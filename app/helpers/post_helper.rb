@@ -1,4 +1,4 @@
-odule PostHelper
+module PostHelper
   def display_errors(post)
     return unless post.errors.full_messages.any?
 
