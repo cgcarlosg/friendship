@@ -1,11 +1,11 @@
 class FriendRequestsController < ApplicationController
   def index
-    unless current_user.nil?
+    if current_user.nil?
+      @friend_offers = @friend_requests = FriendRequest.none
+    else
       @friend_offers = current_user.friend_offers.pending
       @friend_requests = current_user.friend_requests.pending
       @my_friends = current_user.friend_offers.accepted
-    else
-      @friend_offers = @friend_requests = FriendRequest.none
     end
   end
 
@@ -16,7 +16,7 @@ class FriendRequestsController < ApplicationController
       flash[:success] = "Friend request sent to #{friend.name}."
       redirect_back fallback_location: users_path
     else
-      flash.now[:error] = "An error has occured"
+      flash.now[:error] = 'An error has occured'
     end
   end
 
