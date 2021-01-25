@@ -88,4 +88,3 @@ Give a ⭐️ if you like this project!
 - Microverse Active Record Associations, Active record queries
 - Beter README Templates
 - Rails Guides
-
