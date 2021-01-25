@@ -66,9 +66,12 @@ Open `http://localhost:3000/` in your browser.
 
 TBA
 
-## Authors
+## Author
+👤  Carlos Gutierrez
 
-TBA
+- GitHub:  [@cgcarlosg](https://github.com/cgcarlosg)
+- Twitter: [@cgcarlosg1](https://twitter.com/cgcarlosg1)
+- LinkedIn: [@carlosalbeniogutierrez](www.linkedin.com/in/carlosalbeniogutierrez)
 
 ## 🤝 Contributing
 
@@ -82,9 +85,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-TBA
-
-## 📝 License
-
-TBA
+- Microverse Active Record Associations, Active record queries
+- Beter README Templates
+- Rails Guides
 
