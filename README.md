@@ -7,6 +7,8 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
+[screenshot](https://github.com/cgcarlosg/friendship/blob/milestonetwo/app/assets/images/screenshot.png)
+
 ## Live Demo
 
 TBA
