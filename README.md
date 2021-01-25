@@ -48,9 +48,9 @@ To make sure the linters' checks using Github Actions work properly, you should 
 
 Start server with:
 
-```
+
     rails server
-```
+
 
 Open `http://localhost:3000/` in your browser.
 
