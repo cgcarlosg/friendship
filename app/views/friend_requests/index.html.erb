@@ -21,13 +21,10 @@
     </ul>
   <% end %>
 
-    <% unless @my_friends == nil %>
-    <ul>
-    <br/>
-    <h3>My Friends</h3>
-      <% @my_friends.each do |request| %>
-        <h4><%= request.requestee.name %></h4>
-      <%= render 'shared/user_list_item', user: request.requestee, request: request, type: :revoke %>
-      <% end %>
-    </ul>
+  <article class="timeline">
+<h3>My Friends</h3>
+<% unless !@my_friends %>
+<br/>
+<%= render 'my_friends' %>
     <% end %>
+</article>

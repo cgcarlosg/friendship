@@ -8,16 +8,16 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :friend_requests, foreign_key: :requester_id
-  has_many :friend_offers, class_name: 'FriendRequest', foreign_key: :requestee_id
+has_many :friend_requests, foreign_key: :requester_id
+has_many :friend_offers, class_name: 'FriendRequest', foreign_key: :requestee_id
+# has_many :friendships_approved, -> { where accepted: true }, class_name: 'FriendRequest', foreign_key: :requestee_id
+# has_many :friends_made, through: :friendships_made, source: :requestee
+# has_many :friendships_made, -> { where accepted: true }, class_name: 'FriendRequest', foreign_key: :requester_id
+# has_many :inverted_friends, through: :friendships_made, source: :requester
+# has_many :friends_approved, through: :inverted_friends, source: :requester
 
-  has_many :friendships_made, -> { where accepted: true }, class_name: 'FriendRequest',
-                                                           foreign_key: :requester_id
-  has_many :friendships_approved, -> { where accepted: true }, class_name: 'FriendRequest',
-                                                               foreign_key: :requestee_id
-  has_many :friends_made, through: :friendships_made, source: :requestee
-  has_many :friends_approved, through: :friendships_approved, source: :requester
 
+  
   def friends
     User.where('id IN (?)', friend_ids)
   end

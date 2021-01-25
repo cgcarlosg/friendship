@@ -1,0 +1,6 @@
+<ul>  
+      <% @my_friends.each do |request| %>
+        <h4><%= request.requester.name %></h4>
+      <%= render 'shared/user_list_item', user: request.requestee, request: request, type: :revoke %>
+      <% end %>
+    </ul>

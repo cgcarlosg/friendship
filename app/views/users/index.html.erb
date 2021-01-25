@@ -11,8 +11,8 @@
   </thead>
 
   <tbody>
+  <% if !@my_friends %>
     <% @users.each do |user| %>
-     
       <tr>
         <td><%= link_to user.name, user %></td>
         <% if user == current_user %>
@@ -21,7 +21,7 @@
         <td><%= render 'shared/user_list_item', user: user, type: :send %></td>
         <% end %>
       </tr>
-    
+      <% end %>
     <% end %>
   </tbody>
 </table>
