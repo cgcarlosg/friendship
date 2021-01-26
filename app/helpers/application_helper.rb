@@ -15,7 +15,7 @@ module ApplicationHelper
     end
   end
 
-  def render_sign_in 
+  def render_sign_in
     message = ''
     if current_user
       message << link_to(current_user.name, user_path(id: current_user.id))
@@ -28,20 +28,13 @@ module ApplicationHelper
 
   def render_notice
     message = ''
-    if notice.present?
-      message << "<div class=\"notice\"> <p>#{notice}</p> </div>"
-    end
+    message << "<div class=\"notice\"> <p>#{notice}</p> </div>" if notice.present?
     message.html_safe
   end
 
   def render_alert
     message = ''
-    if alert.present?
-      message << "<div class=\"alert\"> <p>#{alert}</p> </div>"
-    end
+    message << "<div class=\"alert\"> <p>#{alert}</p> </div>" if alert.present?
     message.html_safe
   end
-
-  
-
 end
