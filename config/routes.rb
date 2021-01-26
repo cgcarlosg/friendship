@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  
+  resources :friendships
   resources :friend_requests
   root 'posts#index'
 
