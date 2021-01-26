@@ -1,7 +1,6 @@
 module ApplicationHelper
   def menu_link_to(link_text, link_path)
     class_name = current_page?(link_path) ? 'menu-item active' : 'menu-item'
-
     content_tag(:div, class: class_name) do
       link_to link_text, link_path
     end
@@ -15,35 +14,34 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+
   def render_sign_in 
-    out = ''
+    message = ''
     if current_user
-      out << link_to(current_user.name, user_path(id: current_user.id))
-      out << link_to('Sign out', destroy_user_session_path, method: :delete)
+      message << link_to(current_user.name, user_path(id: current_user.id))
+      message << link_to('Sign out', destroy_user_session_path, method: :delete)
     else
-      out << link_to('Sign in', user_session_path)
+      message << link_to('Sign in', user_session_path)
     end
-    out.html_safe
+    message.html_safe
   end
 
   def render_notice
-    out = ''
+    message = ''
     if notice.present?
-      out << "<div class=\"notice\">
-        <p>#{notice}</p>
-      </div>"
+      message << "<div class=\"notice\"> <p>#{notice}</p> </div>"
     end
-    out.html_safe
+    message.html_safe
   end
 
   def render_alert
-    out = ''
+    message = ''
     if alert.present?
-      out << "<div class=\"alert\">
-                <p>#{alert}</p>
-              </div>"
+      message << "<div class=\"alert\"> <p>#{alert}</p> </div>"
     end
-    out.html_safe
+    message.html_safe
   end
+
+  
 
 end
