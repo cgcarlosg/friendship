@@ -1,5 +1,28 @@
-<section class="users-section">
-  <ul class="users-list">
-    <%= render @users %>
-  </ul>
-</section>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Profile</th>
+      <th>Friendship</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <% if user == current_user %>
+        <td><%= link_to "ME", user_path(user), class: 'profile-link' %></td>
+        <% else %>
+        <td><%= link_to 'See Bio and Posts',  user_path(user), class: 'profile-link' %></td>
+        <% end %>
+        <% if user != current_user %>
+        <td> <%= menu_link_to 'Check status', friendships_path %> </td>
+        <% else %>
+        <td> </td>
+        <% end %>
+      </tr>
+      <% end %>
+  
+  </tbody>
+</table>

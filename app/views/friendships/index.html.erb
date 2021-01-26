@@ -1,5 +1,49 @@
-<%= render_requests %>
-<h1>Friends</h1>
-<ul>
-    <%= list_friends %>
-</ul>
+<h1>FRIENDS</h1>
+<br/>
+<div class="container">
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>USERS</th>
+      <th>FRIENDSHIP</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @friends.each do |f| %>
+      <tr>
+      <% if f.status == true %>
+        <td> <%= f.user.name %> </td>
+        <td>  <%= render 'users/friend_btn' %> </td>
+        <% end %>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+</div>
+
+<br/>
+<br/>
+<h1>PEOPLE WHO WANTS TO BE MY FRIEND</h1>
+<br/>
+<div class="container">
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>USERS</th>
+      <th>RESPONSE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% unless @requests == nil %>
+  <% @requests.each do |f| %>
+      <tr>
+        <td> <%= f.user.name %> </td>
+        <td> <%= link_to("Accept", friendship_url(id: f.id), method: :patch, class: "btn") %> 
+             <%= link_to("Decline", friendship_url(id: f.id), method: :delete, class: "btn decline") %> 
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+  </tbody>
+</table>
+</div>
