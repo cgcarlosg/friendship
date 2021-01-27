@@ -3,7 +3,8 @@ module FriendshipsHelper
     message = ''
     if current_user
       message << if @friend == false
-      link_to('Invite to Friendship', friendships_url(friend_id: params[:id]), method: :post, class:"btn btn-secondary")
+                   link_to('Invite to Friendship', friendships_url(friend_id: params[:id]), method: :post,
+                                                                                            class: 'btn btn-secondary')
                  elsif @friend.nil?
                    'Pending'
                  else
