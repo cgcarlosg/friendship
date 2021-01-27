@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   def friend?(user_id)
     friend = Friendship.select(:status).where("friend_id = #{user_id} AND user_id = #{self[:id]}")
-    puts "#{friend} klk"
+    puts " #{friend} "
     return false if friend.empty?
 
     friend.first.status

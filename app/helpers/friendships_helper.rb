@@ -2,12 +2,12 @@ module FriendshipsHelper
   def add_btn
     message = ''
     if current_user
-      message << if @friend != false
-                   link_to('Friendship revoke', friendship_path(current_user), method: :delete, class: 'btn')
+      message << if @friend == false
+      link_to('Invite to Friendship', friendships_url(friend_id: params[:id]), method: :post, class:"btn btn-secondary")
                  elsif @friend.nil?
                    'Pending'
                  else
-                   link_to('Add', friendships_url(friend_id: params[:id]), method: :post, class: 'btn')
+                   'friends'
                  end
     end
     message.html_safe
@@ -16,8 +16,7 @@ module FriendshipsHelper
   def list_friends
     message = ''
     @friends.each do |f|
-      puts f
-      message << "<li>#{f.user.name} #{f.status ? '' : ', pending'}<li>"
+      message << " #{f.user.name} ' / ' #{f.status ? 'Already friends' : ' pending'} <br/><br/>"
     end
     message.html_safe
   end

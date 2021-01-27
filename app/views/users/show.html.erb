@@ -9,12 +9,12 @@
 
   <tbody>
       <tr>
-        <% unless current_user == @user %>
+       <% unless current_user == @user %>
         <td><h3><%= @user.name %></h3></td>
         <td> 
         <%= render 'users/friend_btn' %>
         </td>
-        <% end %>
+       <% end %>
       </tr>
   </tbody>
 </table>
