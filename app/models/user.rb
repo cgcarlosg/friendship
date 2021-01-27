@@ -10,10 +10,14 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverted_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
+  has_many :f_posts, through: :friends, source: :posts
+
   def friends
     friend = Friendship.select("(CASE WHEN user_id = #{self[:id]} THEN friend_id ELSE user_id END) AS user_id, status")
     friend.where(['(user_id = ? OR friend_id = ?)', self[:id], self[:id]])
   end
+
+
 
   # def friends_without_status
   #  friend = Friendship.select("(CASE WHEN user_id = #{self[:id]} THEN friend_id ELSE user_id END) AS user_id")
