@@ -29,9 +29,10 @@ bundle install
 
 Setup database with:
 
-```rails db:drop:all
-   rails db:create
-   rails db:migrate
+```
+rails db:drop:all
+rails db:create
+rails db:migrate
 ```
 
 ### Github Actions
