@@ -13,8 +13,6 @@ class User < ApplicationRecord
 
   has_many :f_posts, through: :friends, source: :posts
 
-
-
   def friends
     friend = Friendship.select("(CASE WHEN user_id = #{self[:id]} THEN friend_id ELSE user_id END) AS user_id, status")
     friend.where(['(user_id = ? OR friend_id = ?)', self[:id], self[:id]])
@@ -36,7 +34,7 @@ class User < ApplicationRecord
 
   def friend?(user_id)
     friend = Friendship.select(:status).where("friend_id = #{user_id} AND user_id = #{self[:id]}")
-    
+
     return false if friend.empty?
 
     friend.first.status

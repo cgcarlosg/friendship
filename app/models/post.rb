@@ -14,5 +14,4 @@ class Post < ApplicationRecord
 
     Post.where(user_id: ids)
   end
-
 end
