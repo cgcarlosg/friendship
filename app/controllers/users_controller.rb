@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    
   end
 
   def show
@@ -11,5 +12,6 @@ class UsersController < ApplicationController
     ids << current_user.id
     @friend = current_user.friend? params[:id]
     @posts = @user.posts.ordered_by_most_recent if ids.include?(@user.id)
+    
   end
 end
