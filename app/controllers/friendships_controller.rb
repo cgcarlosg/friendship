@@ -1,6 +1,10 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
+def index
+  @friends = current_user.friends
+end
+
   def create
     f1 = Friendship.create(user_id: current_user.id, friend_id: params[:id])
     f1.save
@@ -17,4 +21,11 @@ class FriendshipsController < ApplicationController
     end
     redirect_to request.referrer
   end
+  
+  def destroy
+    @friendship = Friendship.find(params[:id])
+    @friendship.destroy
+    redirect_to friendships_path
+  end
+
 end

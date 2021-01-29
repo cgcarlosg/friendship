@@ -10,5 +10,6 @@ class UsersController < ApplicationController
     ids = Friendship.where(user_id: current_user, confirmed: true).pluck(:friend_id)
     ids << current_user.id
     @posts = @user.posts.ordered_by_most_recent if ids.include?(@user.id)
+    
   end
 end

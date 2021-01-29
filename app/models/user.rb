@@ -11,7 +11,11 @@ class User < ApplicationRecord
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
   has_many :f_posts, through: :friends, source: :posts
-  
+
+  has_many :confirmed_friendships, -> { where confirmed: true }, class_name: 'Friendship'
+  has_many :friends, through: :confirmed_friendships
+
+
   def friends
     friends_array = []
     friendships.each { |f| friends_array.push(f.friend) if f.confirmed }
