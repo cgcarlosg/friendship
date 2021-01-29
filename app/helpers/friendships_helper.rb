@@ -1,7 +1,7 @@
 module FriendshipsHelper
   def list_friends
     arr = ''
-    unless @users.nil?
+    return if @users.nil?
       @friends.each do |f|
         puts f
         arr << "<li>#{f.user.name} #{f.confirmed ? '' : ', pending'}<li>"
