@@ -21,3 +21,36 @@ RSpec.describe 'Friendship', type: :model do
     expect(v).to_not be_valid
   end
 end
+
+RSpec.describe Friendship, type: :model do
+  before(:each) do
+    @a = User.create(name: 'a', email: 'a@a.com', password: '111111', password_confirmation: '111111')
+    @a.save
+    @b = User.create(name: 'b', email: 'b@b.com', password: '222222', password_confirmation: '222222')
+    @b.save
+  end
+  context 'testing friendship model' do
+    it 'create valid friendship' do
+      f1 = Friendship.new(user_id: @a.id, friend_id: @b.id, confirmed: true)
+      expect(f1.valid?).to eq(true)
+    end
+
+    it 'create valid friendship' do
+      f1 = Friendship.new(user_id: @a.id, friend_id: @b.id, confirmed: true)
+      f1.save
+      expect(Friendship.all.length).to eq(2)
+    end
+
+    it 'create invalid friendship' do
+      f1 = Friendship.new(user_id: 3, friend_id: 4, confirmed: true)
+      expect(f1.valid?).to eq(false)
+    end
+
+    it 'destroy friendship' do
+      f1 = Friendship.new(user_id: @a.id, friend_id: @b.id, confirmed: true)
+      f1.save
+      Friendship.destroy(f1.id)
+      expect(Friendship.all.length).to eq(1)
+    end
+  end
+end
