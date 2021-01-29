@@ -7,6 +7,5 @@ module FriendshipsHelper
         arr << "<li>#{f.user.name} #{f.confirmed ? '' : ', pending'}<li>"
       end
       arr.html_safe
-    end
   end
 end
