@@ -27,6 +27,7 @@ class User < ApplicationRecord
       next unless f.confirmed.nil? && inverse_friendships.none? do |f2|
         f.friend_id == f2.user_id && f.user_id == f2.friend_id && f.id > f2.id
       end
+
       users.push(f.friend)
     end
     users
@@ -44,7 +45,6 @@ class User < ApplicationRecord
     users
   end
 
-
   def friend?(user)
     friends.include?(user)
   end
@@ -55,6 +55,7 @@ class User < ApplicationRecord
        fr.any? { |f| (f.user_id == id && f.friend_id == user.id) || (f.user_id == user.id && f.friend_id == id) }
       return false
     end
+
     true
   end
 end
