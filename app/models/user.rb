@@ -15,7 +15,6 @@ class User < ApplicationRecord
   has_many :confirmed_friendships, -> { where confirmed: true }, class_name: 'Friendship'
   has_many :friends, through: :confirmed_friendships
 
-
   def friends
     friends_array = []
     friendships.each { |f| friends_array.push(f.friend) if f.confirmed }
@@ -47,8 +46,7 @@ class User < ApplicationRecord
        fr.any? { |f| (f.user_id == id && f.friend_id == user.id) || (f.user_id == user.id && f.friend_id == id) }
       return false
     end
+
     true
   end
-
-
 end
