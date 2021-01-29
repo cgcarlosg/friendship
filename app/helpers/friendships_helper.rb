@@ -3,10 +3,10 @@ module FriendshipsHelper
     arr = ''
     return if @users.nil?
 
-      @friends.each do |f|
-        puts f
-        arr << "<li>#{f.user.name} #{f.confirmed ? '' : ', pending'}<li>"
-      end
-      arr.html_safe
+    @friends.each do |f|
+      puts f
+      arr << "<li>#{f.user.name} #{f.confirmed ? '' : ', pending'}<li>"
+    end
+    arr.html_safe
   end
 end
