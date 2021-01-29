@@ -6,15 +6,7 @@
     <h3> USER / FRIENDSHIP </h3>
   </div>
   <div class="card-body">
-    <h4 class="card-title"> 
-    <% @friends.each do |f| %>
-      <tr>
-      <% if f.status == true %>
-        <td>  <%= list_friends %> </td>
-        <% end %>
-      </tr>
-      <% end %>
-    </h4>
+  
   </div>
 </div>
 
@@ -32,16 +24,7 @@
     </tr>
   </thead>
   <tbody>
-  <% unless @requests == nil %>
-  <% @requests.each do |f| %>
-      <tr>
-        <td> <%= f.user.name %> </td>
-        <td> <%= link_to("Accept", friendship_url(id: f.id), method: :patch, class: "btn") %> 
-             <%= link_to("Decline", friendship_url(id: f.id), method: :delete, class: "btn decline") %> 
-        </td>
-      </tr>
-      <% end %>
-      <% end %>
+ 
   </tbody>
 </table>
 </div>

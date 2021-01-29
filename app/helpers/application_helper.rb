@@ -14,27 +14,4 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
-
-  def render_sign_in
-    message = ''
-    if current_user
-      message << link_to(current_user.name, user_path(id: current_user.id))
-      message << link_to('Sign out', destroy_user_session_path, method: :delete)
-    else
-      message << link_to('Sign in', user_session_path)
-    end
-    message.html_safe
-  end
-
-  def render_notice
-    message = ''
-    message << "<div class=\"notice\"> <p>#{notice}</p> </div>" if notice.present?
-    message.html_safe
-  end
-
-  def render_alert
-    message = ''
-    message << "<div class=\"alert\"> <p>#{alert}</p> </div>" if alert.present?
-    message.html_safe
-  end
 end

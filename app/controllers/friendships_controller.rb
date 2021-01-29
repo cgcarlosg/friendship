@@ -1,26 +1,20 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @friends = current_user.friends
-    @requests = current_user.requests
-  end
-
   def create
-    @friendship = current_user.friendships.build(friend_id: params[:friend_id])
-    @friendship.save
-    redirect_to user_url(id: params[:friend_id])
+    f1 = Friendship.create(user_id: current_user.id, friend_id: params[:id])
+    f1.save
+    redirect_to request.referrer
   end
 
-  def update
-    @friendship = Friendship.find(params[:id])
-    @friendship.update(status: true)
-    redirect_to friendships_path
-  end
-
-  def destroy
-    @friendship = Friendship.find(params[:id])
-    @friendship.destroy
-    redirect_to friendships_path
+  def edit
+    f1 = current_user.inverse_friendships.find_by_user_id(params[:id])
+    if params[:answer] == '1'
+      f1.confirmed = true
+      f1.save
+    elsif params[:answer] == '0'
+      Friendship.destroy(f1.id)
+    end
+    redirect_to request.referrer
   end
 end

@@ -8,14 +8,33 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :friendships
-  has_many :inverted_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
-  has_many :confirmed_friendships, -> { where confirmed: true }, class_name: 'Friendship'
+  has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
   has_many :f_posts, through: :friends, source: :posts
-
+  
   def friends
-    friend = Friendship.select("(CASE WHEN user_id = #{self[:id]} THEN friend_id ELSE user_id END) AS user_id, status")
-    friend.where(['(user_id = ? OR friend_id = ?)', self[:id], self[:id]])
+    friends_array = []
+    friendships.each { |f| friends_array.push(f.friend) if f.confirmed }
+    inverse_friendships.each { |f| friends_array.push(f.user) if f.confirmed }
+    friends_array.compact
+  end
+
+  def users_you_invited
+    friendships.map { |f| f.friend unless f.confirmed }.compact
+  end
+
+  def users_who_invite_you
+    inverse_friendships.map { |f| f.user unless f.confirmed }.compact
+  end
+
+  def confirm_friend(user)
+    friendship = inverse_friendships.find { |f| f.user == user }
+    friendship.confirmed = true
+    friendship.save
+  end
+
+  def friend?(user)
+    friends.include?(user)
   end
 
   def invitable(user)
@@ -24,19 +43,8 @@ class User < ApplicationRecord
        fr.any? { |f| (f.user_id == id && f.friend_id == user.id) || (f.user_id == user.id && f.friend_id == id) }
       return false
     end
-
     true
   end
 
-  def requests
-    Friendship.where(['friend_id = ? AND status IS null', self[:id]])
-  end
 
-  def friend?(user_id)
-    friend = Friendship.select(:status).where("friend_id = #{user_id} AND user_id = #{self[:id]}")
-
-    return false if friend.empty?
-
-    friend.first.status
-  end
 end

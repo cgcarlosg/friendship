@@ -22,7 +22,20 @@
     <%= menu_link_to 'Friendships', friendships_path %>
   </div>
   </div>
-  <%= render_sign_in %>
+  <div class="flex-2 d-flex flex-r-reverse">
+  <% if current_user %>
+  <div class="menu-item">
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+  </div>
+  <div class="menu-item">
+  <p> --> <%= current_user.name%> </p>
+  </div>
+  <% else %>
+  <div class="menu-item">
+  <%= link_to 'Sign in', user_session_path %>
+  </div>
+  <% end %>
+  </div>
 </nav>
     <% if notice.present? %>
       <div class="notice">

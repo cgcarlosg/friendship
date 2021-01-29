@@ -1,30 +1,22 @@
-<div class="container">
-<table class="table table-striped table-bordered table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th>Name</th>
-      <th>Friendship</th>
-    </tr>
-  </thead>
-
-  <tbody>
-      <tr>
-       <% unless current_user == @user %>
-        <td><h3><%= @user.name %></h3></td>
-        <td> 
-        <%= render 'users/friend_btn' %>
-        </td>
-       <% end %>
-      </tr>
-  </tbody>
-</table>
-</div>
-
 <section class="user-section">
+  <h2><%= "Name: #{@user.name}" %></h2>
+  <% if current_user.invitable(@user) %>
+          <div class="d-flex">
+            <%= button_to 'invite',  "/send_request?id=#{@user.id}", class: 'btn btn-secondary' %>
+          </div>
+          <% end%>
+          <% if current_user.users_who_invite_you.any?{|u| u.id == @user.id} %>
+          <div class="d-flex">
+            <br>This user wants to be your friend:
+            <%= button_to 'accept',  "/answer_request?id=#{@user.id}&answer=1", class: 'btn btn-secondary' %>
+            <%= button_to 'reject',  "/answer_request?id=#{@user.id}&answer=0", class: 'btn btn-secondary' %>
+          </div>
+          <% end%>
+          
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
-      <%= render @posts if @posts %>
+    <%= render @posts if @posts %>
     </ul>
   </article>
 </section>
