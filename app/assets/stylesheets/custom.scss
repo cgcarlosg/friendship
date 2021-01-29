@@ -157,7 +157,7 @@ form {
     }
 
     input[type="checkbox"] {
-      width: fit-content;
+      width: 20px;
     }
   }
 
@@ -346,4 +346,8 @@ form {
   .user-section {
     width: 50%;
   }
+}
+
+#customize {
+  width: 200px;
 }

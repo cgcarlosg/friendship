@@ -1,5 +1,24 @@
 <section class="users-section">
   <ul class="users-list">
-    <%= render @users %>
+    <% @users.each do |user| %>
+      <li>
+        Name: <%= user.name %>
+        <span class="profile-link">
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <% if current_user.invitable(user) %>
+          <div class="d-flex">
+            <%= button_to 'invite',  "/send_request?id=#{user.id}", class: 'btn btn-secondary', id:"invite#{user.id}"  %>
+          </div>
+          <% end%>
+          <% if current_user.users_who_invite_you.any?{|u| u.id == user.id} %>
+          <div class="d-flex">
+            <br>This user wants to be your friend:
+            <%= button_to 'accept',  "/answer_request?id=#{user.id}&answer=1", class: 'btn btn-primary' %>
+            <%= button_to 'reject',  "/answer_request?id=#{user.id}&answer=0", class: 'btn btn-secondary' %>
+          </div>
+          <% end%>
+        </span>
+      </li>
+    <% end %>
   </ul>
 </section>
