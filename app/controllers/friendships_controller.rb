@@ -13,19 +13,15 @@ class FriendshipsController < ApplicationController
 
   def edit
     f1 = current_user.inverse_friendships.find_by_user_id(params[:id])
-    case params[:answer]
-    when '1'
+    f2 = current_user.friendships.find_by_friend_id(params[:id])
+    if params[:answer] == '1'
       f1.confirmed = true
       f1.save
-    when '0'
+      f2.confirmed = true
+      f2.save
+    elsif params[:answer] == '0'
       Friendship.destroy(f1.id)
     end
     redirect_to request.referrer
-  end
-
-  def destroy
-    @friendship = Friendship.find(params[:id])
-    @friendship.destroy
-    redirect_to friendships_path
   end
 end

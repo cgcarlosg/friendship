@@ -16,25 +16,34 @@ class User < ApplicationRecord
   has_many :friends, through: :confirmed_friendships
 
   def friends
-    friends_array = []
-    friendships.each { |f| friends_array.push(f.friend) if f.confirmed }
-    inverse_friendships.each { |f| friends_array.push(f.user) if f.confirmed }
+    friends_array = friendships.map { |f| f.friend if f.confirmed }
+    friends_array += inverse_friendships.map { |f| f.user if f.confirmed }
     friends_array.compact
   end
 
   def users_you_invited
-    friendships.map { |f| f.friend unless f.confirmed }.compact
+    users = []
+    friendships.select do |f|
+      next unless f.confirmed.nil? && inverse_friendships.none? do |f2|
+        f.friend_id == f2.user_id && f.user_id == f2.friend_id && f.id > f2.id
+      end
+      users.push(f.friend)
+    end
+    users
   end
 
   def users_who_invite_you
-    inverse_friendships.map { |f| f.user unless f.confirmed }.compact
+    users = []
+    friendships.each do |f|
+      next unless f.confirmed.nil? && inverse_friendships.none? do |f2|
+        f.friend_id == f2.user_id && f.user_id == f2.friend_id && f.id < f2.id
+      end
+
+      users.push(f.friend)
+    end
+    users
   end
 
-  def confirm_friend(user)
-    friendship = inverse_friendships.find { |f| f.user == user }
-    friendship.confirmed = true
-    friendship.save
-  end
 
   def friend?(user)
     friends.include?(user)
@@ -46,7 +55,6 @@ class User < ApplicationRecord
        fr.any? { |f| (f.user_id == id && f.friend_id == user.id) || (f.user_id == user.id && f.friend_id == id) }
       return false
     end
-
     true
   end
 end
