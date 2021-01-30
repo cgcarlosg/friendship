@@ -14,4 +14,10 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+
+  private
+
+  def send_msg(_user)
+    'Your friend request has been sent.'
+  end
 end

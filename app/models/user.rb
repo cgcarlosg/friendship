@@ -12,6 +12,9 @@ class User < ApplicationRecord
 
   has_many :f_posts, through: :friends, source: :posts
 
+  has_many :requests_sent, -> { where(confirmed: false) }, class_name: 'Friendship'
+  has_many :friend_requests, through: :requests_sent, source: :friend
+
   has_many :confirmed_friendships, -> { where confirmed: true }, class_name: 'Friendship'
   has_many :friends, through: :confirmed_friendships
 
