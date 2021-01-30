@@ -8,5 +8,5 @@ RSpec.describe Post, type: :model do
       p.content = nil
       expect(Post.new).to_not be_valid
     end
-end
+  end
 end

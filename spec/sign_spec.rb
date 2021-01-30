@@ -39,8 +39,4 @@ RSpec.describe 'sign in process', type: :feature do
     visit '/users/sign_in'
     expect(page.status_code).to be(200)
   end
-
-
-
-  
 end

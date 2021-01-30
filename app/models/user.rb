@@ -60,8 +60,6 @@ class User < ApplicationRecord
   end
 
   def posts_mine_or_friends
-    post = Post.all.ordered_by_most_recent.select { |p| p if p.user_id == id || friends.any? { |f| f.id == p.user_id } }
-    post
+    Post.all.ordered_by_most_recent.select { |p| p if p.user_id == id || friends.any? { |f| f.id == p.user_id } }
   end
-  
 end
