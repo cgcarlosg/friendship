@@ -29,6 +29,7 @@ RSpec.describe Friendship, type: :model do
     @b = User.create(name: 'b', email: 'b@b.com', password: '222222', password_confirmation: '222222')
     @b.save
   end
+  
   context 'testing friendship model' do
     it 'create valid friendship' do
       f1 = Friendship.new(user_id: @a.id, friend_id: @b.id, confirmed: true)
