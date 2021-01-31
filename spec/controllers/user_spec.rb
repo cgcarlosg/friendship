@@ -13,11 +13,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-
-RSpec.describe 'Friendship', type: :model do
-  it 'will check for create a valid friendship ' do
-    f = User.create!(email: 'test1@gmail.com', name: 'moon', password: '123456')
-    v = Friendship.new(user_id: f.id)
-    expect(v).to_not be_valid
-  end
-end

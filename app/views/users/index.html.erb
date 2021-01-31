@@ -18,6 +18,9 @@
           </div>
           <% end%>
         </span>
+        <% if current_user!=user && !current_user.invitable(user) && !current_user.friend?(user) %>
+        <span><%= send_msg(current_user) %></span>
+        <% end %>
       </li>
     <% end %>
   </ul>
