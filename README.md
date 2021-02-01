@@ -7,6 +7,10 @@
 - Ruby v2.7.0
 - Ruby on Rails v5.2.4
 
+## Live Demo
+
+- [live demo](https://milestonecarlosg.herokuapp.com/login)
+
 ![screenshot](https://github.com/cgcarlosg/friendship/blob/milestonetwo/app/assets/images/screenshot.png)
 
 ## Getting Started
