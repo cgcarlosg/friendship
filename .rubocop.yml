@@ -58,4 +58,4 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: false
   Layout/EndOfLine:
-  EnforcedStyle: lf
+  EnforcedStyle: crlf
