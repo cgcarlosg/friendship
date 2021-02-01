@@ -2,6 +2,11 @@
 
 > This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
 
+## Live Version
+
+![live](https://milestonecarlosg.herokuapp.com/login)
+
+
 ## Built With
 
 - Ruby v2.7.0
@@ -78,7 +83,7 @@ After that type the command to create the app and add the heroku repository to y
 Then deploy the app.
 
 ```
-    git push -u heroku {your-branch}:master
+    git push -u heroku master
 ```
 
 Change {your-branch} for the name of your local branch
