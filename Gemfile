@@ -10,8 +10,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.4'
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development, :test do
