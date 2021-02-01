@@ -7,7 +7,7 @@ gem 'rails', '~> 5.2.4'
 gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'puma', '~> 3.12'
-gem 'bundler', '~> 2.1.4'
+
 gem 'sass-rails', '~> 5.0'
 gem 'rake'
 gem 'uglifier', '>= 1.3.0'
